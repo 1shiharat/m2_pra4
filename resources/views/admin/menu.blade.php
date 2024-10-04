@@ -6,6 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Welcome Home</h1>
+    <h1>管理メニュー</h1>
+    <ul>
+        <li><a href="">イベント管理</a></li>
+        <li><a href="">人材管理</a></li>
+        <li><a href="">派遣情報管理</a></li>
+    </ul>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit">ログアウト</button>
+    </form>
 </body>
 </html>

@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>ログイン</h1>
-    <form method="POST" action="<?php echo route('login'); ?>">
+    <form method="POST" action="{{ route('login') }}">
         @csrf
         <div>
             <label for="email">メールアドレス</label>
