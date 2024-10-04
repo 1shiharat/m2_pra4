@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\WorkerController;
+use App\Http\Controllers\DispatchController;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -35,4 +38,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // ダッシュボード（ホーム画面）
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    // イベント(CRUD)
+    Route::resource('events', EventController::class);
+
+    // 人材管理
+    Route::resource('workers', WorkerController::class);
+
+    // 派遣情報管理
+    Route::resource('dispatches', DispatchController::class);
 });
