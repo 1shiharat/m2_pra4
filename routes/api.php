@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Models\Dispatch;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/my-dispatches', [DispatchController::class, 'getMyDispatches']);
+
+
+Route::get('/events', function(Request $request){
+    $workerId = $request->query('worker_id');
+        
+    $dispatches = Dispatch::with('event') // イベント情報を取得
+                        ->where('worker_id', $workerId)
+                        ->get();
+
+    return response()->json([
+        'status' => 'success',
+        'data' => $dispatches
+    ]);
 });
