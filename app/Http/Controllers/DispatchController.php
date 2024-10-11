@@ -88,4 +88,18 @@ class DispatchController extends Controller
 
         return redirect()->route('dispatches.index')->with('success', '派遣情報が削除されました。');
     }
+
+    public function getMyDispatches(Request $request)
+    {
+        $workerId = Auth::id();
+        
+        $dispatches = Dispatch::with('event') // イベント情報を取得
+                              ->where('worker_id', $workerId)
+                              ->get();
+        
+        return response()->json([
+            'status' => 'success',
+            'data' => $dispatches
+        ]);
+    }
 }
