@@ -45,7 +45,7 @@ class WorkerController extends Controller
 
         } catch (\Exception $e) {
 
-            return redirect()->back()->withErrors(['message' => '登録処理中にエラーが発生しました。もう一度お試しください。']);
+            return redirect()->back()->withErrors(['message' => '登録処理中にエラーが発生しました。もう一度お試しください。'. $e->getMessage()]);
         }
     }
 
