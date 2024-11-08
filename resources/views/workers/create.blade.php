@@ -6,7 +6,17 @@
     <title>新規人材登録</title>
 </head>
 <body>
+
     <h1>新規人材登録</h1>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form method="POST" action="{{ route('workers.store') }}">
         @csrf
         <div>
@@ -15,11 +25,11 @@
         </div>
         <div>
             <label for="email">メールアドレス</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" required autocomplete="off">
         </div>
         <div>
             <label for="password">パスワード</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" required autocomplete="off">
         </div>
         <div>
             <label for="password_confirmation">パスワード確認</label>

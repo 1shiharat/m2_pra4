@@ -29,18 +29,24 @@ class WorkerController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:workers,email',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:workers,email',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
 
-        // // パスワードのハッシュ化
-        // $validated['password'] = bcrypt($validated['password']);
+            // パスワードのハッシュ化
+            $validated['password'] = bcrypt($validated['password']);
 
-        Worker::create($validated);
+            Worker::create($validated);
 
-        return redirect()->route('workers.index')->with('success', '人材が登録されました。');
+            return redirect()->route('workers.index')->with('success', '人材が登録されました。');
+
+        } catch (\Exception $e) {
+
+            return redirect()->back()->withErrors(['message' => '登録処理中にエラーが発生しました。もう一度お試しください。']);
+        }
     }
 
     /**
